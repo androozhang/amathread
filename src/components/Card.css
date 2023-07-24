@@ -1,10 +1,14 @@
 .Card {
-    width: 90vw;
+    width: 100%;
     background-color: white;
-    margin: 1rem 0;
-    padding: 1rem;
-    border-radius: 0.5rem;
+    margin-top: 20px;
+    padding: 0;
+    border-radius: 5px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .Card-link {
+    text-decoration: none;
   }
   
   .Card-header {
@@ -16,17 +20,17 @@
   .Card-title {
     margin: 0;
     font-size: 1.5rem;
-    color: #0077cc;
+    color: #232323;
+    padding-top: 10px;
   }
   
   .Card-meta {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-top: 0.5rem;
     font-size: 0.8rem;
     color: #666;
   }
+
   
   .Card-date {
     margin: 0;
@@ -40,6 +44,7 @@
   .Card-content {
     margin-top: 1rem;
     font-size: 1.2rem;
+    color: black;
   }
   
   .Card-footer {
@@ -47,8 +52,9 @@
   }
   
   .Card-footer a {
-    color: #0077cc;
+    color: #2b2b2b;
     text-decoration: none;
+    padding-bottom: 5px;
   }
   
   .Card-footer a:hover {

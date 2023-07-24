@@ -8,6 +8,7 @@ const Card = (props) => {
 
   return (
     <div className="Card">
+       <Link to={'post/' + props.id} className="Card-link">
       <div className="Card-header">
         <h2 className="Card-title">{props.title}</h2>
       </div>
@@ -16,11 +17,9 @@ const Card = (props) => {
         <p className="Card-votes">{props.vote} votes</p>
       </div>
       <div className="Card-content">
-        <p>{props.content}</p>
+        <p>{props.description}</p>
       </div>
-      <div className="Card-footer">
-        <Link to={'post/' + props.id}>Read more</Link>
-      </div>
+       </Link>
     </div>
   );
 };

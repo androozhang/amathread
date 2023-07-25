@@ -10,37 +10,40 @@ div {
     position: relative;
     color: black;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+  }
+
+  .content h3{
+    padding: 0;
   }
   
+  
+  .votes-section {
+    width: 5%;
+  }
+  .votes-section p{
+    font-size: small;
+    padding: 0px;
+  }
   .card button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
     background-color: transparent;
     border: none;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 12x;
   }
   
-  .card button.editButton::before {
-    content: "\270E";
+  .Card-date {
+    font-size: small;
   }
-  
-  .card button.deleteButton::before {
-    content: "\1F5D1";
-  }
-  
   .votes-section {
-    margin-top: 20px;
+    margin-top: 0px;
   }
   
   .votes-section button {
-    background-color: green;
     border: none;
     cursor: pointer;
-    color: white;
-    margin-top: 10px;
-    padding: 10px 20px;
+    color: rgb(157, 242, 255);
+    font-weight: 1200;
   }
   
   .comment-section {

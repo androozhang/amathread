@@ -3,6 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import './PostDetail.css';
 import { supabase } from '../client';
 import Comment from '../components/Comment';
+import moment from "moment"
+
 
 const PostDetail = () => {
     const { id } = useParams();
@@ -98,13 +100,21 @@ const PostDetail = () => {
     return (
         <div>
             <div className="card">
-                <h3>{post.title}</h3>
-                <p>{post.description}</p>
-                <Link to={`../edit/${post.id}`}>Edit</Link>
-                <button className="deleteButton" onClick={deletePost}>Delete</button>
                 <div className="votes-section">
-                    <button onClick={handleUpvote}>Upvote</button>
+                    <button onClick={handleUpvote}>&uarr;</button>
                     <p>Votes: {vote}</p>
+                </div>
+                <div className="Content">
+                    <p className="Card-date">Created {moment(post.created_at).fromNow()}</p>
+                    <h3>{post.title}</h3>
+                    <p>{post.description}</p>   
+                    <Link to={`../edit/${post.id}`}>
+                    ...
+
+
+
+
+                    </Link>
                 </div>
             </div>
             <div className="comment-section">

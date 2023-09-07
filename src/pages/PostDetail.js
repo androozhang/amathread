@@ -79,18 +79,6 @@ const PostDetail = () => {
             setVotes(vote+1);
         }
     };
-
-    const deletePost = async (event) => {
-        event.preventDefault();
-
-        await supabase
-        .from('Post')
-        .delete()
-        .eq('id', id);
-
-        window.location = "/";
-    }
-    
     
 
     if (!post) {

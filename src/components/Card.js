@@ -11,6 +11,7 @@ const Card = (props) => {
        <Link to={'post/' + props.id} className="Card-link">
       <div className="Card-header">
         <h2 className="Card-title">{props.title}</h2>
+        <p>{props.user}</p>
       </div>
       <div className="Card-meta">
         <p className="Card-date">Created {duration}</p>

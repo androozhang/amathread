@@ -93,7 +93,7 @@ const PostDetail = () => {
                     <p>Votes: {vote}</p>
                 </div>
                 <div className="Content">
-                    <p className="Card-date">Created {moment(post.created_at).fromNow()}</p>
+                    <p className="Card-date">Created {moment(post.created_at).fromNow()} by {post.user_id}</p>
                     <h3>{post.title}</h3>
                     <p>{post.description}</p>   
                     <Link to={`../edit/${post.id}`}>

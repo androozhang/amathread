@@ -34,6 +34,7 @@ const ReadPosts = (props) => {
                 description={post.description}
                 vote = {post.vote}
                 time = {post.created_at}
+                user = {post.user_id}
               />
             ))
           ) : (

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { supabase } from '../client';
 import './CreatePost.css';
+import { useAuth } from '../context/AuthProvider';
 
 const CreatePost = () => {
     const [post, setPosts] = useState({
@@ -19,11 +20,13 @@ const CreatePost = () => {
 
         await supabase
             .from('Post')
-            .insert({ title: post.title, description: post.description})
+            .insert({ title: post.title, description: post.description, user_id: user.id})
             .select();
 
         window.location = '/';
     };
+
+    const { user } = useAuth();
 
     return (
         <div>

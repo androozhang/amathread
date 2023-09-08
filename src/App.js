@@ -1,6 +1,5 @@
-import './App.css';
 import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom'; // Import Routes and Route
+import { Routes, Route, Navigate } from 'react-router-dom'; // Import Routes and Route
 import ReadPosts from './pages/ReadPosts';
 import CreatePost from './pages/CreatePost';
 import EditPost from './pages/EditPost';
@@ -39,19 +38,22 @@ const App = () => {
   return (
     <div className="App">
       <NavBar />
+      <Container className="d-flex align-items-center justify-content-center"
+        style={{ minHeight: "100vh" }}>
+          <div className="w-100" style={{ maxWidth: "400px" }}>
       <Routes>
-        <Route element={<AuthRoute />}>
         <Route path="/" element={<ReadPosts data={posts} />} />
         <Route path="/edit/:id" element={<EditPost data={posts} />} />
         <Route path="/post/:id" element={<PostDetail data={posts} />} />
-        <Route path="/new" element={<CreatePost />} />
+        <Route element={<AuthRoute />}>
+          <Route path="/new" element={<CreatePost />} />
         </Route>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/passwordreset" element={<PasswordReset />} />
       </Routes>
-      <Container className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: "100vh" }}></Container>
+      </div>
+      </Container>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import './PostDetail.css';
 import { supabase } from '../client';
 import Comment from '../components/Comment';
 import moment from "moment"
+import { useAuth } from '../context/AuthProvider';
 
 
 const PostDetail = () => {
@@ -12,6 +13,9 @@ const PostDetail = () => {
     const [comment, setComment] = useState('');
     const [comments, setComments] = useState([]);
     const [vote, setVotes] = useState(0);
+    const [hasUpvoted, setHasUpvoted] = useState(false);
+
+    const { user } = useAuth();
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -49,12 +53,33 @@ const PostDetail = () => {
         fetchComments();
     }, [id]);
 
+    useEffect(() => {
+    const checkUpvoteStatus = async () => {
+        // Check if the user has already upvoted this post
+        if (user) {
+            const { data: upvotes, error } = await supabase
+                .from('Upvote')
+                .select('user_id')
+                .eq('post_id', id)
+                .eq('user_id', user.id)
+                .single();
+
+            if (error) {
+                console.log(error);
+            } else {
+                setHasUpvoted(!!upvotes); // Set hasUpvoted to true if there is an upvote record
+            }
+        }
+    };
+
+    checkUpvoteStatus(); // Check upvote status when component mounts
+}, [id, user]);
+
     const handleCommentChange = (event) => {
         setComment(event.target.value);
     };
 
     const handleCommentSubmit = async (event) => {
-        event.preventDefault();
         const { data: newComment, error } = await supabase
             .from('Comment')
             .insert({ post_id: id, description: comment });
@@ -68,17 +93,54 @@ const PostDetail = () => {
     };
 
     const handleUpvote = async () => {
-        const { data, error } = await supabase
-            .from('Post')
-            .update({ vote: post.vote + 1 })
-            .eq('id', id);
-        
-        if (error) {
-            console.log(error);
+        if (!user || user.id === post.user_id) {
+            // If the user is not logged in or is the post author, do nothing
+            return;
+        }
+    
+        // Check if the user has already upvoted this post
+        if (hasUpvoted) {
+            // Remove the upvote
+            const { error: deleteError } = await supabase
+                .from('Upvote')
+                .delete()
+                .eq('post_id', id)
+                .eq('user_id', user.id);
+    
+            if (deleteError) {
+                console.log(deleteError);
+            } else {
+                setVotes(vote - 1);
+                setHasUpvoted(false); // Update the upvote status to false
+            }
         } else {
-            setVotes(vote+1);
+            // Add an upvote to both the Post and Upvotes table
+            const { error: updateError } = await supabase
+                .from('Post')
+                .update({ vote: post.vote + 1 })
+                .eq('id', id);
+    
+            if (updateError) {
+                console.log(updateError);
+            } else {
+                setVotes(vote + 1);
+                setHasUpvoted(true); // Update the upvote status to true
+    
+                // Update the Vote table with the new upvote
+                const { error: insertError } = await supabase
+                    .from('Upvote')
+                    .insert([{ post_id: id, user_id: user.id }]);
+    
+                if (insertError) {
+                    console.log(insertError);
+                }
+            }
         }
     };
+    
+    
+
+    
     
 
     if (!post) {
@@ -89,20 +151,24 @@ const PostDetail = () => {
         <div>
             <div className="card">
                 <div className="votes-section">
-                    <button onClick={handleUpvote}>&uarr;</button>
+                    <button
+                    onClick={handleUpvote}
+                    style={{ color: hasUpvoted ? 'blue' : 'initial' }}
+                    >
+                        &uarr;
+                    </button>
                     <p>Votes: {vote}</p>
+                    {console.log(hasUpvoted)}
                 </div>
                 <div className="Content">
                     <p className="Card-date">Created {moment(post.created_at).fromNow()} by {post.user_id}</p>
                     <h3>{post.title}</h3>
-                    <p>{post.description}</p>   
-                    <Link to={`../edit/${post.id}`}>
-                    ...
-
-
-
-
-                    </Link>
+                    <p>{post.description}</p>  
+                    {user && user.id === post.user_id && ( // Check if the user is the post author
+                        <Link to={`../edit/${post.id}`}>
+                            Edit Post
+                        </Link>
+                    )}
                 </div>
             </div>
             <div className="comment-section">

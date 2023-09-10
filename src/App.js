@@ -12,6 +12,8 @@ import AuthRoute from './components/AuthRoute';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import PasswordReset from './pages/PasswordReset';
+import UserProfile from './pages/UserProfile';
+import UpdatePassword from './pages/UpdatePassword';
 
 
 const App = () => {
@@ -46,11 +48,13 @@ const App = () => {
         <Route path="/edit/:id" element={<EditPost data={posts} />} />
         <Route path="/post/:id" element={<PostDetail data={posts} />} />
         <Route element={<AuthRoute />}>
+          <Route path="/profile" element={<UserProfile />} />
           <Route path="/new" element={<CreatePost />} />
         </Route>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/passwordreset" element={<PasswordReset />} />
+        <Route path="/update-password" element={<UpdatePassword />} />
       </Routes>
       </div>
       </Container>

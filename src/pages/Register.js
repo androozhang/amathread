@@ -7,44 +7,72 @@ const Register = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
+  const usernameRef = useRef(null);
   const [errorMsg, setErrorMsg] = useState("");
   const [msg, setMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const register = (email, password) =>
-    supabase.auth.signUp({ email, password });
+  const register = (email, password, username) =>
+    supabase.auth.signUp({ email, password, username });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (
-      !passwordRef.current?.value ||
-      !emailRef.current?.value ||
-      !confirmPasswordRef.current?.value
-    ) {
-      setErrorMsg("Please fill all the fields");
-      return;
-    }
-    if (passwordRef.current.value !== confirmPasswordRef.current.value) {
-      setErrorMsg("Passwords doesn't match");
-      return;
-    }
-    try {
-      setErrorMsg("");
-      setLoading(true);
-      const { data, error } = await register(
-        emailRef.current.value,
-        passwordRef.current.value
-      );
-      if (!error && data) {
-        setMsg(
-          "Registration Successful. Check your email to confirm your account"
-        );
-      }
-    } catch (error) {
-      setErrorMsg("Error in Creating Account");
-    }
-    setLoading(false);
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (
+          !passwordRef.current?.value ||
+          !emailRef.current?.value ||
+          !confirmPasswordRef.current?.value ||
+          !usernameRef.current?.value
+        ) {
+          setErrorMsg("Please fill all the fields");
+          return;
+        }
+        if (passwordRef.current.value !== confirmPasswordRef.current.value) {
+          setErrorMsg("Passwords don't match");
+          return;
+        }
+        try {
+          setErrorMsg("");
+          setLoading(true);
+          const { user, session, error } = await register(
+            emailRef.current.value,
+            passwordRef.current.value,
+            usernameRef.current.value
+          );
+          if (error) {
+            setErrorMsg("Error in Creating Account");
+            setLoading(false);
+            console.log(error)
+            return;
+          }
+          
+          // Insert the username into your user data table
+          const { data: userData, error: userError } = await supabase
+            .from('User') // Replace with your table name
+            .upsert([
+              {
+                user_id: user.id, // Assuming your user data table has an 'user_id' column
+                username: usernameRef.current.value,
+                // Add other user data fields as needed
+              },
+            ])
+            .single();
+          
+          if (userError) {
+            setErrorMsg("Error inserting username into database");
+            setLoading(false);
+            return;
+          }
+          
+          setMsg(
+            "Registration Successful. Check your email to confirm your account"
+          );
+        } catch (error) {
+          setErrorMsg("Error in Creating Account");
+          console.log(error)
+        }   
+        setLoading(false);
+      };
+      
 
   return (
     <>
@@ -52,6 +80,10 @@ const Register = () => {
         <Card.Body>
           <h2 className="text-center mb-4">Register</h2>
           <Form onSubmit={handleSubmit}>
+            <Form.Group id="username">
+              <Form.Label>Username</Form.Label>
+              <Form.Control type="text" ref={usernameRef} required />
+            </Form.Group>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" ref={emailRef} required />

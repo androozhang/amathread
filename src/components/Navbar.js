@@ -48,8 +48,8 @@ const NavBar = () => {
           </Nav>
           <Nav>
             {auth && (
-              <Nav.Link as={Button} onClick={handleLogout}>
-                LogOut
+              <Nav.Link as={Link} to="/profile" >
+                Profile
               </Nav.Link>
             )}
           </Nav>

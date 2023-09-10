@@ -3,9 +3,10 @@ import { supabase } from '../client'; // Import your Supabase client
 import { useAuth } from '../context/AuthProvider';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Card from '../components/Card';
 
 const UserProfile = () => {
-  const { user, signOut, passwordReset, updatePassword } = useAuth();
+  const { user, signOut } = useAuth();
   const [username, setUsername] = useState(null); // State to hold the fetched username
 
   const handleLogout = async (e) => {
@@ -18,25 +19,6 @@ const UserProfile = () => {
     }
   };
 
-  const handlePasswordReset = async (e) => {
-    e.preventDefault();
-    try {
-      const { error } = await passwordReset();
-      console.log(error);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleUpdatePassword = async (e) => {
-    e.preventDefault();
-    try {
-      const { error } = await updatePassword();
-      console.log(error);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
 
   useEffect(() => {
@@ -62,6 +44,24 @@ const UserProfile = () => {
     }
   }, [user]); // Include 'user' in the dependencies array to re-fetch data when the user changes
 
+  const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        fetchPosts();
+      }, []);
+      
+
+    const fetchPosts = async () => {
+        const { data } = await supabase
+          .from('Post')
+          .select("*")
+          .eq("user_id", user.id)
+          .order('created_at', { ascending: true });
+      
+        // Set state of posts
+        setPosts(data);
+      };
+
     return (
       <div>
         {user ? (
@@ -78,7 +78,25 @@ const UserProfile = () => {
                 Reset Password
               </Button>
             </Link>
+            <div className="ReadPosts">
+            {posts && posts.length > 0 ? (
+            posts.map((post, index) => (
+              <Card
+                key={post.id} // Add a unique key prop for each rendered Card component
+                id={post.id}
+                title={post.title}
+                description={post.description}
+                vote = {post.vote}
+                time = {post.created_at}
+                user = {post.user_id}
+              />
+            ))
+          ) : (
+            <h2>{'No Challenges Yet 😞'}</h2>
+          )}
+        </div>
           </div>
+          
         ) : (
           <div>
             <p>Loading username data...</p>

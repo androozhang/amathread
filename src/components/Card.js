@@ -2,9 +2,11 @@ import React from 'react';
 import './Card.css';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import { useAuth } from '../context/AuthProvider';
 
 const Card = (props) => {
   const duration = moment(props.time).fromNow();
+
 
   return (
     <div className="Card">

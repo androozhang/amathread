@@ -161,7 +161,7 @@ const PostDetail = () => {
                     {console.log(hasUpvoted)}
                 </div>
                 <div className="Content">
-                    <p className="Card-date">Created {moment(post.created_at).fromNow()} by {post.user_id}</p>
+                    <p className="Card-date">Created {moment(post.created_at).fromNow()} by {post.username}</p>
                     <h3>{post.title}</h3>
                     <p>{post.description}</p>  
                     {user && user.id === post.user_id && ( // Check if the user is the post author

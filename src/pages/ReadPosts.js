@@ -21,7 +21,7 @@ const ReadPosts = (props) => {
         // Set state of posts
         setPosts(data);
       };
-      
+
     
       return (
         <div className="ReadPosts">
@@ -34,7 +34,7 @@ const ReadPosts = (props) => {
                 description={post.description}
                 vote = {post.vote}
                 time = {post.created_at}
-                user = {post.user_id}
+                user = {post.username}
               />
             ))
           ) : (

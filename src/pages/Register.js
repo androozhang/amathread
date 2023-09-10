@@ -48,7 +48,7 @@ const Register = () => {
           // Insert the username into your user data table
           const { data: userData, error: userError } = await supabase
             .from('User') // Replace with your table name
-            .upsert([
+            .insert([
               {
                 user_id: user.id, // Assuming your user data table has an 'user_id' column
                 username: usernameRef.current.value,
@@ -71,6 +71,19 @@ const Register = () => {
           console.log(error)
         }   
         setLoading(false);
+      };
+
+      const handleGoogleSignIn = async () => {
+        const { data, error } = await supabase.auth.signInWithOAuth({
+          provider: 'google',
+          options: {
+            queryParams: {
+              access_type: 'offline',
+              prompt: 'consent',
+            },
+          },
+        })
+        
       };
       
 
@@ -112,6 +125,9 @@ const Register = () => {
             <div className="text-center mt-2">
               <Button disabled={loading} type="submit" className="w-50">
                 Register
+              </Button>
+              <Button disabled={loading} onClick={handleGoogleSignIn} className="w-50">
+                Register with Google
               </Button>
             </div>
           </Form>

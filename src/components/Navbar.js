@@ -25,17 +25,7 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            {!auth && (
-              <Nav.Link as={Link} to="/login">
-                Login
-              </Nav.Link>
-            )}
-            {!auth && (
-              <Nav.Link as={Link} to="/register">
-                Register
-              </Nav.Link>
-            )}
-            {auth && (
+            {(
               <Nav.Link as={Link} to="/">
                 Home
               </Nav.Link>
@@ -50,6 +40,16 @@ const NavBar = () => {
             {auth && (
               <Nav.Link as={Link} to="/profile" >
                 Profile
+              </Nav.Link>
+            )}
+            {!auth && (
+              <Nav.Link as={Link} to="/login">
+                Login
+              </Nav.Link>
+            )}
+            {!auth && (
+              <Nav.Link as={Link} to="/register">
+                Register
               </Nav.Link>
             )}
           </Nav>

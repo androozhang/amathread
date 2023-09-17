@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Alert, Button, Card, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { supabase } from "../client";
+import { Container } from "react-bootstrap";
 
 const Register = () => {
   const emailRef = useRef(null);
@@ -84,11 +85,14 @@ const Register = () => {
           },
         })
         
+
       };
       
 
   return (
-    <>
+    <Container className="d-flex align-items-center justify-content-center"
+        style={{ minHeight: "100vh" }}>
+    <div className="w-100" style={{ maxWidth: "400px" }}>
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Register</h2>
@@ -136,7 +140,8 @@ const Register = () => {
       <div className="w-100 text-center mt-2">
         Already a User? <Link to={"/login"}>Login</Link>
       </div>
-    </>
+    </div>
+    </Container>
   );
 };
 

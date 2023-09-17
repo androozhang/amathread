@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Alert, Button, Card, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
+import { Container } from "react-bootstrap";
 
 const Login = () => {
   const emailRef = useRef(null);
@@ -33,7 +34,9 @@ const Login = () => {
   };
 
   return (
-    <>
+    <Container className="d-flex align-items-center justify-content-center"
+        style={{ minHeight: "100vh" }}>
+   <div className="w-100" style={{ maxWidth: "400px" }}>
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Login</h2>
@@ -68,7 +71,8 @@ const Login = () => {
       <div className="w-100 text-center mt-2">
   Forgot Password? <Link to={"/passwordreset"}>Click Here</Link>
 </div>
-    </>
+    </div>
+    </Container>
   );
 };
 

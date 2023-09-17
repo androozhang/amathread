@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Alert, Button, Card, Form } from "react-bootstrap";
 import { useAuth } from "../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
 const UpdatePassword = () => {
   const { updatePassword } = useAuth();
@@ -35,7 +36,9 @@ const UpdatePassword = () => {
   };
 
   return (
-    <>
+    <Container className="d-flex align-items-center justify-content-center"
+        style={{ minHeight: "100vh" }}>
+      <div className="w-100" style={{ maxWidth: "400px" }}>
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Update Password</h2>
@@ -64,7 +67,8 @@ const UpdatePassword = () => {
           </Form>
         </Card.Body>
       </Card>
-    </>
+    </div>
+    </Container>
   );
 };
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Card from '../components/Card';
 import { supabase } from '../client';
 import "./ReadPosts.css"
+import { Container, Row, Col } from 'react-bootstrap';
 
 const ReadPosts = (props) => {
 
@@ -24,9 +25,11 @@ const ReadPosts = (props) => {
 
     
       return (
+        <Container>
         <div className="ReadPosts">
           {posts && posts.length > 0 ? (
             posts.map((post, index) => (
+              <Row key={post.id} className="mt-3">
               <Card
                 key={post.id} // Add a unique key prop for each rendered Card component
                 id={post.id}
@@ -36,11 +39,13 @@ const ReadPosts = (props) => {
                 time = {post.created_at}
                 user = {post.username}
               />
+              </Row>
             ))
           ) : (
             <h2>{'No Challenges Yet 😞'}</h2>
           )}
         </div>
+        </Container>
       );
       
 }

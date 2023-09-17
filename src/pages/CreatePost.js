@@ -25,7 +25,6 @@ const CreatePost = () => {
                 {
                     title: post.title,
                     description: post.description,
-                    vote: 0,
                     username: username, // Set the username to the logged-in user's username
                     user_id: user.id, // Set the user_id to the logged-in user's id
                 },

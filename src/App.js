@@ -40,9 +40,6 @@ const App = () => {
   return (
     <div className="App">
       <NavBar />
-      <Container className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: "100vh" }}>
-          <div className="w-100" style={{ maxWidth: "400px" }}>
       <Routes>
         <Route path="/" element={<ReadPosts data={posts} />} />
         <Route path="/edit/:id" element={<EditPost data={posts} />} />
@@ -57,8 +54,6 @@ const App = () => {
         <Route path="/update-password" element={<UpdatePassword />} />
       </Routes>
       </div>
-      </Container>
-    </div>
   );
 };
 

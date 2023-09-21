@@ -78,6 +78,7 @@ const Register = () => {
         const { data, error } = await supabase.auth.signInWithOAuth({
           provider: 'google',
           options: {
+            redirectURI: 'https://droothread.netlify.app/auth/google/callback',
             queryParams: {
               access_type: 'offline',
               prompt: 'consent',

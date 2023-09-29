@@ -1,59 +1,46 @@
 # Web Development Final Project - *AMA Thread*
 
-Submitted by: **Andrew**
+# AMA Thread Web App
 
-This web app: **Ask me anything**
+## Features
 
-Time spent: **10** hours spent in total
+- **Create Posts**: Users can create posts with titles and optionally add textual content or an external image URL.
 
-## Required Features
+- **Home Feed**: A feed displays previously created posts by default, showing the time created, title, and number of upvotes for each post.
 
-The following **required** functionality is completed:
+- **Post Details**: Clicking on a post directs the user to a new page for the selected post.
 
-- [X] **A create form that allows the user to create posts**
-- [X] **Posts have a title and optionally additional textual content and/or an image added as an external image URL**
-- [X] **A home feed displaying previously created posts**
-- [X] **By default, the time created, title, and number of upvotes for each post is shown on the feed**
-- [X] **Clicking on a post shall direct the user to a new page for the selected post**
-- [ ] **Users can sort posts by either their created time or upvotes count**
-- [ ] **Users can search for posts by title**
-- [X] **A separate post page for each created post, where any additional information is shown is linked whenever a user clicks a post**
-- [X] **Users can leave comments underneath a post on the post's separate page**
-- [X] **Each post should have an upvote button on the post's page. Each click increases its upvotes count by one and users can upvote any number of times**
-- [X] **A previously created post can be edited or deleted from its post page**
+- **Sort and Search**: Users can sort posts by their created time, and you can search for posts by title.
 
-The following **optional** features are implemented:
+- **Comments**: Users can leave comments underneath a post on the post's separate page.
 
-- [ ] Users can only edit and deleted posts or delete comments by entering the secret key, which is set by the user during post creation
-- [ ] Upon launching the web app, the user is assigned a random user ID. It will be associated with all posts and comments that they make and displayed on them.
-- [ ] Users can repost a previous post by referencing its post ID. On the post page of the new post, the referenced post is displayed and linked, creating a thread
-- [ ] Users can customize the interface of the web app
-- [ ] Users can share and view web videos
-- [ ] Users can set flags while creating a post. Then users can filter posts by flags on the home feed.
-- [ ] Users can upload images directly from their local machine as an image file
-- [ ] Display a loading animation whenever data is being fetched
+- **Upvote Posts**: Each post has an upvote button on its page, and users can upvote posts multiple times.
 
-The following **additional** features are implemented:
+- **Edit or Delete Posts**: A previously created post can be edited or deleted from its post page.
 
-* [ ] List anything else that you added to improve the site's functionality!
+## Technologies Used
 
-## Video Walkthrough
+- **React**: The front-end of this web app is built using React for a responsive and dynamic user interface.
 
-Here's a walkthrough of implemented user stories:
+- **Bootstrap**: Bootstrap is used for styling and layout to ensure a clean and user-friendly design.
 
-![Kapture 2023-04-25 at 00 13 45](https://user-images.githubusercontent.com/82245268/234174623-4265bd58-a2fa-4363-83f0-a143b8edfd8a.gif)
+- **Supabase**: Supabase is used for backend functionality, including data storage and management.
 
+## How to Use
 
-<!-- Replace this with whatever GIF tool you used! -->
-GIF created with ...  
-<!-- Recommended tools:
-[Kap](https://getkap.co/) for macOS
-[ScreenToGif](https://www.screentogif.com/) for Windows
-[peek](https://github.com/phw/peek) for Linux. -->
+1. **Creating Posts**: To create a post, click on the create button and fill in the title, textual content, and image URL (optional). You can also set a secret key for additional security.
 
-## Notes
+2. **Viewing Posts**: In the home feed, click on a post to view its details, including comments and the upvote button.
 
-Describe any challenges encountered while building the app.
+3. **Upvoting**: Click the upvote button on a post to increase its upvotes count.
+
+4. **Editing or Deleting Posts**: On the post's page, you can edit or delete the post. If a secret key is set, provide it for editing or deletion.
+
+5. **Commenting**: Under each post, leave comments or engage in discussions.
+
+## Screenshot
+
+![Screenshot][https://i.imgur.com/PfmbmLf.png]
 
 ## License
 

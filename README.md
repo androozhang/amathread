@@ -40,7 +40,7 @@
 
 ## Screenshot
 
-![Screenshot][https://i.imgur.com/PfmbmLf.png]
+![Screenshot](https://i.imgur.com/PfmbmLf.png)
 
 ## License
 

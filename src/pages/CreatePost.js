@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../client';
-import './CreatePost.css';
 import { useAuth } from '../context/AuthProvider';
 
 const CreatePost = () => {

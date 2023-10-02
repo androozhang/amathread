@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import './PostDetail.css';
 import { supabase } from '../client';
 import Comment from '../components/Comment';
 import moment from 'moment';
@@ -199,87 +198,90 @@ const PostDetail = () => {
   }
 
   return (
-    <Container>
-      <div>
-        <div className="card mt-5">
-          <Row className="mt-1">
-            <Col md={1} className="vote-col d-flex flex-column align-items-center mt-3 text-center">
-              <div className="votes-section">
-                <Button
-                  variant="primary"
-                  onClick={handleUpvote}
-                  style={{
-                    color: hasUpvoted ? 'blue' : 'initial',
-                  }}
-                >
-                  &uarr;
-                </Button>
-                <div>{vote}</div>
-              </div>
-            </Col>
-            <Col md={11} className="mb-3">
-              <div className="Content">
-                <p className="Card-date">
-                  Created {moment(post.created_at).fromNow()} by {post.username}
-                </p>
-                <h3>{post.title}</h3>
-                <p>{post.description}</p>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            {user && user.id === post.user_id && (
-              <Col md={12}>
-                <Link
-                  to={`../edit/${post.id}`}
-                  className="btn btn-warning"
-                >
-                  Edit Post
-                </Link>
-              </Col>
-            )}
-          </Row>
+<Container>
+  <div>
+    <div className="card mt-5 h-64 position-relative">
+      <Row className="mt-1">
+        <Col md={1} className="vote-col d-flex flex-column align-items-center mt-3 text-center">
+          <div className="votes-section">
+            <Button
+              variant="primary"
+              onClick={handleUpvote}
+              style={{
+                color: hasUpvoted ? 'blue' : 'initial',
+              }}
+            >
+              &uarr;
+            </Button>
+            <div>{vote}</div>
+          </div>
+        </Col>
+        <Col md={11} className="mb-3">
+          <div className="Content">
+            <p className="Card-date text-gray-500 dark:text-gray-400">
+              Created {moment(post.created_at).fromNow()} by {post.username}
+            </p>
+            <h3 className='text-2xl font-bold dark:text-black'>{post.title}</h3>
+            <p className='mt-3'>{post.description}</p>
+          </div>
+        </Col>
+      </Row>
+      <Row>
+        <div className='bottom-0 left-0 position-absolute mb-4 ml-3'>
+        {user && user.id === post.user_id && (
+          <Col md={12}>
+            <Link
+              to={`../edit/${post.id}`}
+              className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+            >
+              Edit Post
+            </Link>
+          </Col>
+        )}
         </div>
-        <div className="comment-section">
-          <Row className='mt-5'>
-            <Col md={12}>
-              <h3>Comments</h3>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={12}>
-            {user ? (
-            <form onSubmit={handleCommentSubmit}>
-                <textarea
-                id="comment"
-                name="comment"
-                value={comment}
-                onChange={handleCommentChange}
-                className="form-control"
-                ></textarea>
-                <Button
-                type="submit"
-                variant="primary"
-                className="mt-2"
-                >
-                Submit
-                </Button>
-            </form>
-            ) : (
-            <p>Login to comment</p>
-            )}
-            </Col>
-          </Row>
-          {comments.map((comment) => (
-            <Row key={comment.id} className="mt-3">
-              <Col md={12}>
-                <Comment comment={comment} />
-              </Col>
-            </Row>
-          ))}
-        </div>
-      </div>
-    </Container>
+      </Row>
+    </div>
+    <div className="comment-section">
+      <Row className='mt-5'>
+        <Col md={12}>
+          <h3>Comments</h3>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={12}>
+        {user ? (
+        <form onSubmit={handleCommentSubmit}>
+            <textarea
+            id="comment"
+            name="comment"
+            value={comment}
+            onChange={handleCommentChange}
+            className="form-control"
+            ></textarea>
+            <Button
+            type="submit"
+            variant="primary"
+            className="mt-2"
+            >
+            Submit
+            </Button>
+        </form>
+        ) : (
+        <p>Login to comment</p>
+        )}
+        </Col>
+      </Row>
+      {comments.map((comment) => (
+        <Row key={comment.id} className="mt-3">
+          <Col md={12}>
+            <Comment comment={comment} />
+          </Col>
+        </Row>
+      ))}
+    </div>
+  </div>
+</Container>
+
   );
 };
 

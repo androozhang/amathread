@@ -93,7 +93,6 @@ const UserProfile = () => {
     return (
       <Container className="mt-5">
       <Row>
-        <Col md={12} className="text-center">
           {user ? (
             <div>
               <h2>Welcome, {username}</h2>
@@ -104,6 +103,7 @@ const UserProfile = () => {
               <Link to="/passwordreset">
                 <Button>Reset Password</Button>
               </Link>
+              
               <div className="ReadPosts">
             {posts && posts.length > 0 ? (
             posts.map((post, index) => (
@@ -127,7 +127,6 @@ const UserProfile = () => {
               <p>Loading username data...</p>
             </div>
           )}
-        </Col>
       </Row>
     </Container>
     );

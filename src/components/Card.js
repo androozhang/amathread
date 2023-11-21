@@ -1,5 +1,4 @@
 import React from 'react';
-import './Card.css';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { useAuth } from '../context/AuthProvider';
@@ -7,22 +6,21 @@ import { useAuth } from '../context/AuthProvider';
 const Card = (props) => {
   const duration = moment(props.time).fromNow();
 
-
   return (
-    <div className="Card">
-       <Link to={'post/' + props.id} className="Card-link">
-      <div className="Card-header">
-        <h2 className="Card-title">{props.title}</h2>
-        <p>{props.user}</p>
-      </div>
-      <div className="Card-meta">
-        <p className="Card-date">Created {duration}</p>
-        <p className="Card-votes">{props.vote} votes</p>
-      </div>
-      <div className="Card-content">
-        <p>{props.description}</p>
-      </div>
-       </Link>
+    <div className="w-full bg-white mt-4 p-0 rounded border border-gray-400 shadow-md">
+      <Link to={'/post/' + props.id} className="no-underline">
+        <div className="flex justify-between items-center p-4">
+          <h2 className="text-xl text-black font-bold">{props.title}</h2>
+          <p>{props.user}</p>
+        </div>
+        <div className="flex justify-between p-4 text-sm text-gray-600">
+          <p className="mr-4">Created {duration}</p>
+          <p>{props.vote} votes</p>
+        </div>
+        <div className="p-4">
+          <p className="text-lg text-black">{props.description}</p>
+        </div>
+      </Link>
     </div>
   );
 };

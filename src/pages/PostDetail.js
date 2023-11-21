@@ -232,7 +232,7 @@ const PostDetail = () => {
           <Col md={12}>
             <Link
               to={`../edit/${post.id}`}
-              className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+              className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded"
             >
               Edit Post
             </Link>
@@ -251,20 +251,17 @@ const PostDetail = () => {
         <Col md={12}>
         {user ? (
         <form onSubmit={handleCommentSubmit}>
-            <textarea
+          <textarea
             id="comment"
             name="comment"
             value={comment}
             onChange={handleCommentChange}
             className="form-control"
-            ></textarea>
-            <Button
-            type="submit"
-            variant="primary"
-            className="mt-2"
-            >
+          ></textarea>
+          {/* Replace the existing Button component */}
+          <button class="mt-3 text-white bg-gradient-to-br from-blue-500 to-green-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
             Submit
-            </Button>
+          </button>
         </form>
         ) : (
         <p>Login to comment</p>
